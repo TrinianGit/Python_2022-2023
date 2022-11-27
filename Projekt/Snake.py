@@ -178,7 +178,7 @@ class Board:
             text = font.render("Pozostały czas działania", True, BLUE)
             screen.blit(text, (600 + 150 - text.get_width() / 2, space))
 
-            text = font.render("złotego jabłka:", True, BLUE)
+            text = font.render("złotego jabłka", True, BLUE)
             screen.blit(text, (600 + 150 - text.get_width() / 2, space + text.get_height() - 5))
             space += -10 + 2 * text.get_height()
 
@@ -192,10 +192,10 @@ class Board:
             if (boost.boost_time > 0):
                 font = pygame.font.SysFont("rasa", 30)
 
-                text = font.render("Pozostały czas złotego:", True, BLUE)
+                text = font.render("Pozostały czas złotego", True, BLUE)
                 screen.blit(text, (600 + 150 - text.get_width() / 2, space))
 
-                text = font.render("jabłka na planszy:", True, BLUE)
+                text = font.render("jabłka na planszy", True, BLUE)
                 screen.blit(text, (600 + 150 - text.get_width() / 2, space + text.get_height() - 5))
                 space += -10 + 2 * text.get_height()
 
@@ -210,7 +210,7 @@ class Board:
                 text = font.render("Czas do pojawienia się", True, BLUE)
                 screen.blit(text, (600 + 150 - text.get_width() / 2, space))
 
-                text = font.render("złotego jabłka:", True, BLUE)
+                text = font.render("złotego jabłka", True, BLUE)
                 screen.blit(text, (600 + 150 - text.get_width() / 2, space + text.get_height() - 5))
                 space += -10 + 2 * text.get_height()
 
@@ -453,21 +453,21 @@ class Boost:
     def decrease_boost_time(self, time):
         if(self.boost_active):
             self.boost_time -= time
-            if (self.boost_time == 0):
+            if (int(self.boost_time) == 0):
                 self.boost_active = False
                 self.boost_next_time = 180.0
                 pygame.mixer.music.load('./Music/Game_music.wav')
                 pygame.mixer.music.set_volume(0.1)
                 pygame.mixer.music.play(-1)
-            if (self.boost_time < 0.0):
+            if (int(self.boost_time) < 0.0):
                 self.boost_time = 0.0
         else:
             self.boost_next_time -= time
             self.boost_time -= time
-            if(self.boost_next_time == 0):
+            if(int(self.boost_next_time) == 0 and self.position == (-10, -10)):
                 self.boost_time = 30.0
                 self.generate_new(self.snake, self.apple)
-            elif(self.boost_time == 0):
+            elif(int(self.boost_time) == 0):
                 self.boost_next_time = 180.0
                 self.position = (-10,-10)
 
